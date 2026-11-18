@@ -5,7 +5,21 @@
 .statline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:12px 0}
 .meter{height:9px;background:#2c384b;border-radius:8px;overflow:hidden}.meter>div{height:100%;background:#6bdca7}
 .notice{border-left:3px solid #b7d1ff;padding:10px 12px;background:#1b2330;border-radius:8px;font-size:12px;color:#b5c2d5}
-</style></head><body><main><h1>MY FINANCE</h1><div class="muted">Личные финансы · MDL</div><nav class="tabs"><button class="active" data-page="home">Главная</button><button data-page="entries">Операции</button><button data-page="work">Работа</button><button data-page="accounts">Счета</button><button data-page="budget">Бюджет</button><button data-page="analytics">Аналитика</button><button data-page="credit">Кредит</button><button data-page="goals">Цели</button><button data-page="backup">Копия</button></nav><section class="screen active" id="home"><h2>Обзор</h2><div class="card"><div class="muted">Баланс внесённых операций</div><div class="number" id="balance">0 MDL</div></div><div class="grid"><div class="card"><div class="muted">Доходы</div><h2 class="green" id="income">0</h2></div><div class="card"><div class="muted">Расходы</div><h2 class="red" id="expenses">0</h2></div></div><div class="card"><b>Ближайший платёж</b><p>15 декабря 2026 · 789 MDL</p><span class="small">Кредит №1 · ставка 15,9%</span></div><p class="small">Баланс отражает только добавленные операции, а не банковский счёт.</p></section><section class="screen" id="entries"><h2>Новая операция</h2><div class="card"><form id="entryForm"><label>Тип</label><select name="type"><option value="expense">Расход</option><option value="income">Доход</option></select><label>Сумма MDL</label><input min="0.01" name="amount" placeholder="150" required="" step="0.01" type="number"/><label>Категория</label><select name="category"><option>Продукты</option><option>Топливо</option><option>Зарплата</option><option>Чаевые</option><option>Аренда</option><option>Коммуналка</option><option>Кредит</option><option>Семья</option><option>Развлечения</option><option>Другое</option></select><label>Счёт</label><select name="account"><option value="cash">Наличные</option><option value="card">Карта</option></select><label>Дата</label><input name="date" required="" type="date"/><label>Комментарий</label><input maxlength="100" name="note" placeholder="Необязательно"/><button class="primary wide">Сохранить</button></form></div><h2>История</h2><div class="card" id="history"></div></section><section class="screen" id="work">
+
+button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #b7d1ff}
+.actionbar{display:flex;gap:8px;flex-wrap:wrap}.actionbar button{flex:1}
+.subtle{font-size:12px;color:#9da8b8;line-height:1.6}
+.good{color:#6bdca7}.warn{color:#ffd08a}
+textarea{display:block;width:100%;min-height:110px;padding:12px;background:#101822;color:#f4f6fb;border:1px solid #405068;border-radius:12px;font-size:14px}
+summary{cursor:pointer;font-weight:650}details{margin:10px 0}
+</style></head><body><main><h1>MY FINANCE</h1><div class="muted">Личные финансы · MDL</div><nav class="tabs"><button class="active" data-page="home">Главная</button><button data-page="entries">Операции</button><button data-page="work">Работа</button><button data-page="accounts">Счета</button><button data-page="budget">Бюджет</button><button data-page="analytics">Аналитика</button><button data-page="credit">Кредит</button><button data-page="goals">Цели</button><button data-page="advisor">Советник</button><button data-page="backup">Копия</button></nav><section class="screen active" id="home">
+<h2>Мои деньги</h2><div class="card"><div class="muted">Общий баланс по учёту</div><div class="number" id="balance">0 MDL</div><div class="subtle" id="balanceHint"></div></div>
+<div class="grid"><div class="card"><div class="muted">Карта</div><h2 id="homeCard">0 MDL</h2></div><div class="card"><div class="muted">Наличные</div><h2 id="homeCash">0 MDL</h2></div></div>
+<div class="grid" style="margin-top:12px"><div class="card"><div class="muted">Доходы (история)</div><h2 class="green" id="income">0</h2></div><div class="card"><div class="muted">Расходы (история)</div><h2 class="red" id="expenses">0</h2></div></div>
+<div class="card"><b>Ближайший платёж</b><p id="homeCreditDue">15 декабря 2026 · 789 MDL</p><span class="small">Кредит №1 · ставка 15,9% · проверь остаток в банке</span></div>
+<div class="card"><b>Быстрые действия</b><div class="actionbar" style="margin-top:12px"><button data-jump="entries">+ Операция</button><button data-jump="work">+ Смена</button><button data-jump="accounts">Счета</button></div></div>
+<p class="small">Это учёт в приложении, а не синхронизация с банком. Для точного баланса установи начальные остатки в «Счета».</p>
+</section><section class="screen" id="entries"><h2>Новая операция</h2><div class="card"><form id="entryForm"><label>Тип</label><select name="type"><option value="expense">Расход</option><option value="income">Доход</option></select><label>Сумма MDL</label><input min="0.01" name="amount" placeholder="150" required="" step="0.01" type="number"/><label>Категория</label><select name="category"><option>Продукты</option><option>Топливо</option><option>Зарплата</option><option>Чаевые</option><option>Аренда</option><option>Коммуналка</option><option>Кредит</option><option>Семья</option><option>Развлечения</option><option>Другое</option></select><label>Счёт</label><select name="account"><option value="cash">Наличные</option><option value="card">Карта</option></select><label>Дата</label><input name="date" required="" type="date"/><label>Комментарий</label><input maxlength="100" name="note" placeholder="Необязательно"/><button class="primary wide">Сохранить</button></form></div><h2>История</h2><div class="card" id="history"></div></section><section class="screen" id="work">
 <h2>Работа и зарплата</h2><p class="hint">Зарплата начисляется после смены. Чаевые сразу считаются полученными. Выплаты 14-го на карту и 16-го наличными — две части одной зарплаты.</p>
 <label for="workmonth">Расчётный месяц</label><input class="monthselect" id="workmonth" type="month"/>
 <div class="workstats">
@@ -28,13 +42,37 @@
 <button class="primary wide">Сохранить запись</button></form>
 <p class="hint">Выплата добавляется в доходы только при получении денег. Удержание уменьшает сумму к выплате, но не создаёт расход в балансе.</p></div>
 <h2>История за месяц</h2><div class="card" id="workHistory"></div>
-</section><section class="screen" id="credit"><h2>Кредит №1</h2><div class="card"><div class="muted">Последний сообщённый остаток</div><div class="number">7 330 MDL</div><p>Ставка: <b>15,9% годовых</b></p><p>Платёж: <b>789 MDL / месяц</b></p><p>15 ноября 2026: <b class="status">оплачен</b></p><p>Следующий: <b>15 декабря 2026</b></p><p class="small">Остаток не пересчитывается автоматически. Уточняй его в банке после платежей.</p></div></section><section class="screen" id="goals"><h2>Финансовые цели</h2><div id="goallist"></div><div class="card"><label>Добавить цель</label><input id="goalinput" placeholder="Название цели"/><button class="primary wide" id="addgoal">Добавить</button></div></section>
+</section><section class="screen" id="credit"><h2>Кредиты и долги</h2>
+<div class="card"><h2>Кредит №1</h2><div class="muted">Последний подтверждённый остаток</div><div class="number" id="creditBalance">7 330 MDL</div>
+<p>Ставка: <b id="creditRate">15,9%</b> годовых</p><p>Ежемесячный платёж: <b id="creditPayment">789 MDL</b></p>
+<p>Следующий платёж: <b id="creditNext">15 декабря 2026</b></p><p class="small">После оплаты уточни остаток у банка. Автоматически вычитать 789 MDL из основного долга нельзя: часть платежа — проценты.</p>
+<details><summary>Обновить кредит по данным банка</summary><form id="creditForm" style="margin-top:12px">
+<label>Остаток долга, MDL</label><input name="balance" type="number" min="0" step=".01" required/>
+<label>Годовая ставка, %</label><input name="rate" type="number" min="0" step=".01" required/>
+<label>Платёж в месяц, MDL</label><input name="payment" type="number" min="0" step=".01" required/>
+<label>Следующая дата платежа</label><input name="next" type="date" required/>
+<button class="primary wide">Сохранить данные банка</button></form></details></div>
+<div class="card"><h2>Другие долги</h2><form id="debtForm">
+<label>Название</label><input name="name" maxlength="70" placeholder="Например, долг другу" required/>
+<label>Остаток, MDL</label><input name="amount" type="number" min=".01" step=".01" required/>
+<label>Ежемесячный платёж, MDL (можно 0)</label><input name="monthly" type="number" min="0" step=".01" value="0" required/>
+<button class="primary wide">Добавить долг</button></form><div id="debtList"></div></div></section><section class="screen" id="goals"><h2>Финансовые цели</h2><div id="goallist"></div><div class="card"><label>Добавить цель</label><input id="goalinput" placeholder="Название цели"/><button class="primary wide" id="addgoal">Добавить</button></div></section>
 <section class="screen" id="accounts">
 <h2>Карта и наличные</h2><p class="small">Считаются только операции с выбранным счётом. Старые операции без счёта показываются отдельно.</p>
 <div class="accountgrid">
 <div class="card"><div class="muted">Карта</div><div class="number" id="cardBal">0</div></div>
 <div class="card"><div class="muted">Наличные</div><div class="number" id="cashBal">0</div></div>
 </div><div class="card"><div class="muted">Без распределения</div><div class="number" id="unassignedBal">0</div></div>
+<div class="card"><h2>Настроить реальные остатки</h2>
+<p class="hint">Первоначальная настройка: укажи, сколько денег сейчас на карте и наличными. Корректировка не считается доходом. При повторной настройке суммы пересчитываются без двойного начисления.</p>
+<form id="balanceSetup">
+<label>Реальный баланс карты, MDL</label><input name="card" type="number" min="0" step=".01" required value="1700"/>
+<label>Реальные наличные, MDL</label><input name="cash" type="number" min="0" step=".01" required value="700"/>
+<label>Дата сверки</label><input name="date" type="date" required/>
+<button class="primary wide">Установить остатки</button></form>
+<p class="hint">Внимание: сначала распределяй старые операции, затем устанавливай остатки. Для первого запуска можно оставить 1 700 и 700, если они всё ещё актуальны.</p>
+</div>
+<div class="card"><h2>Старые операции без счёта</h2><p class="hint">Выбери, к какому счёту относится каждая старая операция. Это не создаёт новых доходов и расходов.</p><div id="legacyEntries"></div></div>
 <div class="card"><h2>Перевод между счетами</h2>
 <form id="transferForm"><label>Откуда</label><select name="from"><option value="card">Карта</option><option value="cash">Наличные</option></select>
 <label>Сумма, MDL</label><input name="amount" type="number" min=".01" step=".01" required/>
@@ -58,6 +96,13 @@
 <div class="card"><div class="statline"><span>Доходы</span><b class="green" id="monthIncome"></b></div><div class="statline"><span>Расходы</span><b class="red" id="monthExpense"></b></div><div class="statline"><span>Разница</span><b id="monthNet"></b></div></div>
 <div class="card"><h2>Расходы по категориям</h2><div id="categoryBars"></div></div>
 <div class="card"><h2>Подсказка</h2><p class="hint" id="analyticsTip"></p></div></section>
+<section class="screen" id="advisor"><h2>Финансовый советник</h2>
+<div class="card"><p>Подготовим отчёт из данных MY FINANCE для анализа в ChatGPT. <b>Без API и дополнительных платежей.</b></p>
+<label>За месяц</label><input id="advisorMonth" type="month"/>
+<button class="primary wide" id="makeReport">Сформировать отчёт</button>
+<textarea id="advisorReport" readonly placeholder="Нажми «Сформировать отчёт»"></textarea>
+<button class="wide" id="copyReport">Скопировать отчёт</button>
+<p class="small">Вставь текст в наш чат. Автоматической передачи данных нет. Перед отправкой проверь, нет ли личных сведений, которые не хочешь раскрывать.</p></div></section>
 <section class="screen" id="backup"><h2>Резервная копия</h2><div class="card"><p>Данные сохраняются в браузере на этом устройстве. Скачивай копию регулярно.</p><button class="primary wide" id="export">Скачать JSON</button><p><label>Восстановить из файла</label><input accept="application/json" id="import" type="file"/></p></div><p class="small">Автоматической синхронизации с ChatGPT или банком пока нет. Не очищай данные сайта без резервной копии.</p></section></main><script>const KEY='myfinance-v1';const defaults={entries:[],shifts:[],payroll:[],goals:['Финансовая подушка','Собственная квартира','Погасить кредиты','Велосипед','Отпуск']};let state;try{state=JSON.parse(localStorage.getItem(KEY))||structuredClone(defaults)}catch{state=structuredClone(defaults)}state.shifts=Array.isArray(state.shifts)?state.shifts:[];state.payroll=Array.isArray(state.payroll)?state.payroll:[];state.transfers=Array.isArray(state.transfers)?state.transfers:[];state.bills=Array.isArray(state.bills)?state.bills:[];state.goalPlans=state.goalPlans||{};const $=s=>document.querySelector(s),fmt=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n)+' MDL';function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function render(){let income=state.entries.filter(x=>x.type==='income').reduce((a,x)=>a+x.amount,0),expense=state.entries.filter(x=>x.type==='expense').reduce((a,x)=>a+x.amount,0);$('#balance').textContent=fmt(income-expense);$('#income').textContent=fmt(income);$('#expenses').textContent=fmt(expense);$('#history').innerHTML=state.entries.length?state.entries.map(x=>`<div class="entry"><div><b>${safe(x.category)}</b><small>${safe(x.date)} ${safe(x.note||'')}</small></div><div><b class="${x.type==='income'?'green':'red'}">${x.type==='income'?'+':'−'}${fmt(x.amount)}</b><br><button data-delete="${x.id}">Удалить</button></div></div>`).join(''):'<span class="muted">Операций пока нет</span>';renderWork();$('#goallist').innerHTML=state.goals.map((x,i)=>`<div class="card entry"><b>${safe(x)}</b><button data-goal="${i}">Удалить</button></div>`).join('')}document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page))});$('#entryForm').elements.date.value=new Date().toLocaleDateString('en-CA');$('#entryForm').onsubmit=e=>{e.preventDefault();let f=e.target,amount=Number(f.elements.amount.value);if(!Number.isFinite(amount)||amount<=0)return;state.entries.unshift({id:Date.now(),type:f.elements.type.value,amount,category:f.elements.category.value,date:f.elements.date.value,account:f.elements.account.value,note:f.elements.note.value});f.reset();f.elements.date.value=new Date().toLocaleDateString('en-CA');save()};$('#history').onclick=e=>{let id=e.target.dataset.delete;if(id&&confirm('Удалить операцию?')){state.entries=state.entries.filter(x=>String(x.id)!==id);save()}};$('#addgoal').onclick=()=>{let v=$('#goalinput').value.trim();if(v){state.goals.push(v);$('#goalinput').value='';save()}};$('#goallist').onclick=e=>{let i=e.target.dataset.goal;if(i!==undefined&&confirm('Удалить цель?')){state.goals.splice(Number(i),1);save()}};$('#export').onclick=()=>{let url=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='my-finance-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000)};$('#import').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(!Array.isArray(d.entries)||!Array.isArray(d.goals)||!d.entries.every(x=>['income','expense'].includes(x.type)&&Number.isFinite(x.amount)&&x.amount>0))throw Error();if(confirm('Заменить текущие операции и цели данными из копии?')){state=d;state.shifts=Array.isArray(state.shifts)?state.shifts:[];state.payroll=Array.isArray(state.payroll)?state.payroll:[];state.transfers=Array.isArray(state.transfers)?state.transfers:[];state.bills=Array.isArray(state.bills)?state.bills:[];state.goalPlans=state.goalPlans||{};save()}}catch{alert('Файл резервной копии не подходит')}};
 // Payroll records are separate from cash transactions. Only received tips and actual payouts create income entries.
 const workDate=()=>{let d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
@@ -157,5 +202,97 @@ $('#goalProgress').onclick=e=>{let b=e.target.closest('[data-plan]');if(!b)retur
 $('#analyticsMonth').onchange=renderAnalytics;
 const oldRender=render;
 render=function(){oldRender();renderV3()};
+
+
+// Final release: explicit balance reconciliation, migration, debts, advisor
+state.opening=state.opening||{card:0,cash:0};
+state.debts=Array.isArray(state.debts)?state.debts:[];
+state.credit=state.credit||{balance:7330,rate:15.9,payment:789,next:'2026-12-15'};
+const money=n=>Number(n)||0;
+const dateLabel=d=>{if(!d)return 'не указана';let [y,m,day]=d.split('-');return `${day}.${m}.${y}`};
+const accountOf=e=>e.account==='cash'||e.account==='card'?e.account:null;
+function accountTotal(which){
+ return money(state.opening[which])+state.entries.reduce((s,e)=>s+(accountOf(e)===which?(e.type==='income'?money(e.amount):-money(e.amount)):0),0)+state.transfers.reduce((s,t)=>s+(t.to===which?money(t.amount):0)-(t.from===which?money(t.amount):0),0);
+}
+function unassignedTotal(){return state.entries.reduce((s,e)=>s+(!accountOf(e)?(e.type==='income'?money(e.amount):-money(e.amount)):0),0)}
+function finalRender(){
+ let card=accountTotal('card'),cash=accountTotal('cash'),other=unassignedTotal();
+ $('#cardBal').textContent=fmt(card);$('#cashBal').textContent=fmt(cash);$('#unassignedBal').textContent=fmt(other);
+ $('#homeCard').textContent=fmt(card);$('#homeCash').textContent=fmt(cash);
+ $('#balance').textContent=fmt(card+cash+other);
+ $('#balanceHint').textContent=other?'Есть старые операции без счёта: '+fmt(other):'Карта + наличные';
+ $('#legacyEntries').innerHTML=state.entries.filter(e=>!accountOf(e)).map(e=>`<div class="entry"><div><b>${safe(e.category)}</b><small>${safe(e.date)} · ${e.type==='income'?'+':'−'}${fmt(e.amount)}</small></div><div><button data-assign="${e.id}" data-account="cash">Нал</button> <button data-assign="${e.id}" data-account="card">Карта</button></div></div>`).join('')||'<p class="muted">Все операции распределены.</p>';
+ let c=state.credit;$('#creditBalance').textContent=fmt(c.balance);$('#creditRate').textContent=String(c.rate).replace('.',',')+'%';
+ $('#creditPayment').textContent=fmt(c.payment);$('#creditNext').textContent=dateLabel(c.next);
+ $('#homeCreditDue').textContent=dateLabel(c.next)+' · '+fmt(c.payment);
+ $('#debtList').innerHTML=state.debts.map(d=>`<div class="entry"><div><b>${safe(d.name)}</b><small>Остаток ${fmt(d.amount)} · платёж ${fmt(d.monthly)}</small></div><button data-debt="${d.id}">Удалить</button></div>`).join('');
+ // planned budget includes other debts, not double-counting main credit
+ $('#billsTotal').textContent=fmt(money(c.payment)+state.debts.reduce((s,d)=>s+money(d.monthly),0)+state.bills.reduce((s,b)=>s+money(b.amount),0));
+ let bl=$('#billsList');let base=`<div class="workline"><span>Кредит №1 · ${c.next?Number(c.next.slice(-2)):'15'}-е</span><b>${fmt(c.payment)}</b></div>`;
+ bl.innerHTML=base+state.debts.map(d=>`<div class="workline"><span>${safe(d.name)} · долг</span><b>${fmt(d.monthly)}</b></div>`).join('')+state.bills.map(b=>`<div class="workline"><span>${safe(b.name)} · ${b.day}-е</span><span>${fmt(b.amount)} <button data-bill="${b.id}">×</button></span></div>`).join('');
+}
+const previousRender=render;
+render=function(){previousRender();finalRender()};
+document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>document.querySelector(`[data-page="${b.dataset.jump}"]`).click());
+$('#balanceSetup').elements.date.value=workDate();
+$('#balanceSetup').onsubmit=e=>{
+ e.preventDefault();let f=e.target,card=Number(f.elements.card.value),cash=Number(f.elements.cash.value);
+ if(![card,cash].every(x=>Number.isFinite(x)&&x>=0))return alert('Укажи корректные суммы');
+ if(!confirm('Установить фактические остатки? Это скорректирует учёт без добавления доходов.'))return;
+ // Reconcile to the selected real balance without touching existing history.
+ state.opening.card=money(state.opening.card)+(card-accountTotal('card'));
+ state.opening.cash=money(state.opening.cash)+(cash-accountTotal('cash'));
+ state.openingReconciledAt=f.elements.date.value;
+ save();alert('Остатки установлены. Не добавляй эти суммы ещё раз как доход.');
+};
+$('#legacyEntries').onclick=e=>{
+ let b=e.target.closest('[data-assign]');if(!b)return;
+ let entry=state.entries.find(x=>String(x.id)===b.dataset.assign);if(!entry)return;
+ if(!confirm('Отнести операцию «'+entry.category+'» к счёту '+(b.dataset.account==='cash'?'Наличные':'Карта')+'?'))return;
+ entry.account=b.dataset.account;
+ // When balances already reconciled, preserve displayed real balances by adjusting opening.
+ if(state.openingReconciledAt){
+  let delta=entry.type==='income'?money(entry.amount):-money(entry.amount);
+  state.opening[entry.account]-=delta;
+ }
+ save();
+};
+$('#creditForm').onsubmit=e=>{
+ e.preventDefault();let f=e.target, balance=Number(f.elements.balance.value),rate=Number(f.elements.rate.value),payment=Number(f.elements.payment.value);
+ if(![balance,rate,payment].every(x=>Number.isFinite(x)&&x>=0)||!f.elements.next.value)return;
+ state.credit={balance,rate,payment,next:f.elements.next.value};save();alert('Кредит обновлён по введённым данным.');
+};
+$('#debtForm').onsubmit=e=>{
+ e.preventDefault();let f=e.target,amount=Number(f.elements.amount.value),monthly=Number(f.elements.monthly.value),name=f.elements.name.value.trim();
+ if(!name||!Number.isFinite(amount)||amount<=0||!Number.isFinite(monthly)||monthly<0)return;
+ state.debts.push({id:Date.now(),name,amount,monthly});f.reset();save();
+};
+$('#debtList').onclick=e=>{let b=e.target.closest('[data-debt]');if(b&&confirm('Удалить долг из учёта?')){state.debts=state.debts.filter(d=>String(d.id)!==b.dataset.debt);save()}};
+$('#advisorMonth').value=workDate().slice(0,7);
+$('#makeReport').onclick=()=>{
+ let m=$('#advisorMonth').value,ops=state.entries.filter(x=>x.date&&x.date.startsWith(m));
+ let inc=ops.filter(x=>x.type==='income').reduce((s,x)=>s+money(x.amount),0),exp=ops.filter(x=>x.type==='expense').reduce((s,x)=>s+money(x.amount),0);
+ let cats={};ops.filter(x=>x.type==='expense').forEach(x=>cats[x.category]=(cats[x.category]||0)+money(x.amount));
+ let sh=state.shifts.filter(x=>x.date&&x.date.startsWith(m)),pays=state.payroll.filter(x=>x.period===m);
+ let c=state.credit;
+ $('#advisorReport').value=`Проанализируй мои финансы за ${m}. Дай практичные советы по бюджету, расходам и накоплениям, без платных сервисов.\nДоходы по операциям: ${fmt(inc)}.\nРасходы: ${fmt(exp)}.\nРазница: ${fmt(inc-exp)}.\nРасходы по категориям: ${Object.entries(cats).map(([k,v])=>k+' '+fmt(v)).join('; ')||'нет записей'}.\nСмены: ${sh.length}, начислено: ${fmt(sh.reduce((s,x)=>s+money(x.salary),0))}, чаевые: ${fmt(sh.reduce((s,x)=>s+money(x.tips),0))}.\nВыплаты: ${fmt(pays.filter(x=>x.kind!=='deduction').reduce((s,x)=>s+money(x.amount),0))}; удержания: ${fmt(pays.filter(x=>x.kind==='deduction').reduce((s,x)=>s+money(x.amount),0))}.\nКарта: ${fmt(accountTotal('card'))}; наличные: ${fmt(accountTotal('cash'))}; нераспределено: ${fmt(unassignedTotal())}.\nКредит: остаток ${fmt(c.balance)}, ставка ${c.rate}%, платёж ${fmt(c.payment)}.\nОбязательные платежи по плану: ${$('#billsTotal').textContent}.\nЦели: ${state.goals.join(', ')}.\nУчитывай, что данные могут быть неполными и суммы на счетах сверены вручную.`;
+};
+$('#copyReport').onclick=async()=>{
+ let val=$('#advisorReport').value;if(!val)return alert('Сначала сформируй отчёт');
+ try{await navigator.clipboard.writeText(val);alert('Отчёт скопирован')}catch{$('#advisorReport').focus();$('#advisorReport').select();alert('Выделен текст. Нажми «Скопировать» в меню iPhone.')}
+};
+// Improve import validation and migration: old import handler still works, normalize after any save.
+const originalSave=save;
+save=function(){
+ state.entries=Array.isArray(state.entries)?state.entries:[];
+ state.shifts=Array.isArray(state.shifts)?state.shifts:[];
+ state.payroll=Array.isArray(state.payroll)?state.payroll:[];
+ state.transfers=Array.isArray(state.transfers)?state.transfers:[];
+ state.bills=Array.isArray(state.bills)?state.bills:[];
+ state.debts=Array.isArray(state.debts)?state.debts:[];
+ state.opening=state.opening||{card:0,cash:0};
+ state.credit=state.credit||{balance:7330,rate:15.9,payment:789,next:'2026-12-15'};
+ originalSave();
+};
 
 render();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});</script></body></html>
